@@ -111,9 +111,10 @@ void DrawAxis(float scale);
 void HelpDisplay(GLint ww, GLint wh);
 void HelpRenderBitmapString(float x, float y, void *font, char *string);
 void room (void);
+void Livingroom(void);
 void principalRoom(void);
 void banio(void);
-
+void lrFurniture(void);
 
 
 
@@ -760,8 +761,13 @@ void Display(void)
 	 glTranslatef(4.6, 0, 0);
 	  room();
 		banio();
-
 	 glPopMatrix ();
+
+	 glPushMatrix();
+	 	glTranslatef(0,0,3);
+		lrFurniture();
+		Livingroom();
+	 glPopMatrix();
 
 	glPopMatrix();
 
@@ -771,6 +777,61 @@ void Display(void)
     glutSwapBuffers();
 }
 
+void Livingroom()
+{
+  glPushMatrix ();
+    glTranslatef(0, .60, 2.0);
+    glScalef(2.3,1,.8);
+    glCallList(modeWall);
+  glPopMatrix ();
+
+
+	glPushMatrix ();
+    glTranslatef(4.6, .60, 2.0);
+    glScalef(2.3,1,.8);
+    glCallList(modeWall);
+  glPopMatrix ();
+
+	glPushMatrix ();
+    glTranslatef(0.3, .60, -1);
+    glScalef(2,1,.8);
+    glCallList(modeWall);
+  glPopMatrix ();
+
+	glPushMatrix ();
+    glTranslatef(4.9, .60, -1);
+    glScalef(2,1,.8);
+    glCallList(modeWall);
+  glPopMatrix ();
+
+  glPushMatrix ();
+    glTranslatef(-2.3, .60, 0.5);
+    glRotatef(90,0,1,0);
+    glScalef(1.5,1,.8);
+    glCallList(modeWall);
+  glPopMatrix ();
+
+  glPushMatrix ();
+    glTranslatef(6.9, .60, 0.5);
+    glRotatef(90,0,1,0);
+    glScalef(1.5,1,.8);
+    glCallList(modeWall);
+  glPopMatrix ();
+
+  glPushMatrix ();
+    glTranslatef(0, -0.4, 0.5);
+    glRotatef(90,0,1,0);
+    glScalef(1.5,.5, 2.3);
+    glCallList(modePiso);
+  glPopMatrix ();
+
+	glPushMatrix ();
+    glTranslatef(4.6, -0.4, 0.5);
+    glRotatef(90,0,1,0);
+    glScalef(1.5,.5, 2.3);
+    glCallList(modePiso);
+  glPopMatrix ();
+}
 
 void room()
 {
@@ -800,6 +861,51 @@ void room()
     glScalef(1.5,.5, 2.3);
     glCallList(modePiso);
   glPopMatrix ();
+}
+
+void lrFurniture(){
+	/* SOFA */
+	glPushMatrix ();
+	 glTranslatef(.5, 0, -0.19);
+	 glScalef(1.2, 1.2, 1.2);
+	 glCallList(mode10);
+	glPopMatrix ();
+
+	/* DINNING TABLE */
+	glPushMatrix();
+		glTranslatef(4.3,0.13,0.5);
+		glRotatef(90, 0, 1.0, 0);
+		glScalef(1,1,1);
+		glCallList(mode11);
+	glPopMatrix();
+
+	/* BREAD */
+	glPushMatrix();
+		glTranslatef(4.8,0.53,0.5);
+		glRotatef(90, 0, 1.0, 0);
+		glScalef(0.15,0.15,0.15);
+		glCallList(mode12);
+	glPopMatrix();
+
+	/* COFFEE TABLE */
+	glPushMatrix();
+		glTranslatef(0,0,1);
+		glScalef(0.9,0.8,0.4);
+		glCallList(mode14);
+	glPopMatrix();
+
+	/* FRUIT */
+	glPushMatrix();
+		glTranslatef(4.3,0.545,0.5);
+		glRotatef(90, 0, 1.0, 0);
+		glScalef(0.06,0.06,0.06);
+		glCallList(mode13);
+	glPopMatrix();
+
+
+
+
+
 }
 
 void principalRoom()
@@ -870,6 +976,13 @@ void banio ()
 		glCallList(mode8);
 	glPopMatrix ();
 
+	/* UPPER CABINET */
+	glPushMatrix();
+	 glTranslatef(-2.15, .79, 0.3);
+	 glScalef(.81,.81,.8);
+	 glRotatef(90, 0, 1,0);
+		glCallList(mode15);
+	glPopMatrix ();
 
 	/*shower*/
 	glPushMatrix ();
@@ -992,6 +1105,35 @@ glmUnitize(pmodel9);
 glmVertexNormals(pmodel9, 90.0, GL_TRUE);
 mode9 = glmList(pmodel9, GLM_SMOOTH | GLM_2_SIDED | GLM_MATERIAL | GLM_TEXTURE);
 
+pmodel10 = glmReadOBJ( "data/sofa.obj" );
+glmUnitize(pmodel10);
+glmVertexNormals(pmodel10, 90.0, GL_TRUE);
+mode10 = glmList(pmodel10, GLM_SMOOTH | GLM_2_SIDED | GLM_MATERIAL | GLM_TEXTURE);
+
+pmodel11 = glmReadOBJ( "data/table_and_chairs2.obj" );
+glmUnitize(pmodel11);
+glmVertexNormals(pmodel11, 90.0, GL_TRUE);
+mode11 = glmList(pmodel11, GLM_SMOOTH | GLM_2_SIDED | GLM_MATERIAL | GLM_TEXTURE);
+
+pmodel12 = glmReadOBJ( "data/bread.obj" );
+glmUnitize(pmodel12);
+glmVertexNormals(pmodel12, 90.0, GL_TRUE);
+mode12 = glmList(pmodel12, GLM_SMOOTH | GLM_2_SIDED | GLM_MATERIAL | GLM_TEXTURE);
+
+pmodel13 = glmReadOBJ( "data/ameixa_obj.obj" );
+glmUnitize(pmodel13);
+glmVertexNormals(pmodel13, 90.0, GL_TRUE);
+mode13 = glmList(pmodel13, GLM_SMOOTH | GLM_2_SIDED | GLM_MATERIAL | GLM_TEXTURE);
+
+pmodel14 = glmReadOBJ( "data/salontafel.obj" );
+glmUnitize(pmodel14);
+glmVertexNormals(pmodel14, 90.0, GL_TRUE);
+mode14 = glmList(pmodel14, GLM_SMOOTH | GLM_2_SIDED | GLM_MATERIAL | GLM_TEXTURE);
+
+pmodel15 = glmReadOBJ( "data/pensile_cucina_45x90_Scene.obj" );
+glmUnitize(pmodel15);
+glmVertexNormals(pmodel15, 90.0, GL_TRUE);
+mode15 = glmList(pmodel15, GLM_SMOOTH | GLM_2_SIDED | GLM_MATERIAL | GLM_TEXTURE);
 
     glutMainLoop();
 
